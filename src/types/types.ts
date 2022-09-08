@@ -1,7 +1,9 @@
 interface IUser {
-  name: string
+  _id: string
   email: string
-  avatar?: string
+  password: string
+  hash: string
+  validPassword: any
 }
 interface IItem {
   title: string

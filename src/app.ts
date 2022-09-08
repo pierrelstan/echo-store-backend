@@ -1,6 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import itemRoutes from './routes/items'
+
+import itemRoutes from './routes/item.route'
+import userRoutes from './routes/user.route'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -35,6 +37,7 @@ mongoose
 
     /** Routes */
     app.use('/items', itemRoutes)
+    app.use('/user', userRoutes)
 
     /** Healthcheck */
     app.get('/ping', (req, res, next) =>
