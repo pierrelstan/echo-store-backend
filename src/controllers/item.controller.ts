@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import Item from '../models/item'
+import Item from '../models/item.model'
 
 const readAll = (req: Request, res: Response, next: NextFunction) => {
   return Item.find()
