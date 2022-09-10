@@ -15,10 +15,16 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-const register = (req: Request, res: Response, next: NextFunction) => {
-  let { email, password } = req.body
-
-  console.log(email, password)
+const register = async (req: Request, res: Response, next: NextFunction) => {
+  let { email, password } = req.body // see if user exists
+  let user = await User.findOne({
+    email,
+  })
+  if (user) {
+    return res.status(400).json({
+      errors: [{ msg: 'User already exits' }],
+    })
+  }
 
   bcryptjs.hash(password, 10, (hashError, hash) => {
     if (hashError) {
@@ -52,10 +58,11 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 
 const login = (req: Request, res: Response, next: NextFunction) => {
   let { email, password } = req.body
-
+  console.log(req)
   User.find({ email })
     .exec()
     .then((users) => {
+      console.log(users)
       if (users.length !== 1) {
         return res.status(401).json({
           message: 'Unauthorized',
