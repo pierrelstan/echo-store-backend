@@ -6,5 +6,16 @@ const readAll = (req: Request, res: Response, next: NextFunction) => {
     .then((items) => res.status(200).json({ items }))
     .catch((error) => res.status(500).json({ error }))
 }
+const getOneItem = (req: Request, res: Response, next: NextFunction) => {
+  const itemId = req.params.id
 
-export default { readAll }
+  return Item.findById(itemId)
+    .then((item) =>
+      item
+        ? res.status(200).json({ item })
+        : res.status(404).json({ message: 'not found' })
+    )
+    .catch((error) => res.status(500).json({ error }))
+}
+
+export default { readAll, getOneItem }
