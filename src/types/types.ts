@@ -15,4 +15,11 @@ interface IItem {
   userId: any
 }
 
-export { IItem, IUser }
+interface ICart {
+  userId: string
+  itemId: any
+  quantity: number
+  isAddedToCart: Boolean
+}
+
+export { IItem, IUser, ICart }

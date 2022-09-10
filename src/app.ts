@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 
 import itemRoutes from './routes/item.route'
 import userRoutes from './routes/user.route'
+import cartRoutes from './routes/cart.route'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -38,6 +39,7 @@ mongoose
     /** Routes */
     app.use('/items', itemRoutes)
     app.use('/user', userRoutes)
+    app.use('/cart', cartRoutes)
 
     /** Healthcheck */
     app.get('/ping', (req, res, next) =>
@@ -47,7 +49,7 @@ mongoose
     /** Error handling */
     app.use((req, res, next) => {
       const error = new Error('Not found')
-
+      console.log(req)
       res.status(404).json({
         message: error.message,
       })
