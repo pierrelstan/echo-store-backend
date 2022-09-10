@@ -12,7 +12,7 @@ interface IItem {
   price: number
   isShirt: boolean
   isJean: boolean
-  user: any
+  userId: any
 }
 
 export { IItem, IUser }
