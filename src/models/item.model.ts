@@ -8,7 +8,7 @@ const itemSchema = new Schema<IItem>({
   price: { type: Number, required: true },
   isShirt: { type: Boolean, required: true },
   isJean: { type: Boolean, required: true },
-  user: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
+  userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 })
 
 const Item = model<IItem>('Item', itemSchema)
