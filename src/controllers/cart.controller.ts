@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import Item from '../models/item.model'
+import Product from '../models/product.model'
 import Cart from '../models/cart.model'
 import { validationResult } from 'express-validator'
 
@@ -13,7 +13,7 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
       })
     }
 
-    let item = await Item.findById({
+    let item = await Product.findById({
       _id: itemId,
     })
 
@@ -37,9 +37,8 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
       })
       const carts = await cart.populate({
         path: 'itemId',
-        model: 'Item',
+        model: 'Product',
       })
-      console.log(carts)
       await carts.save()
       res.status(201).json(carts)
     } catch (error) {
@@ -112,7 +111,6 @@ const removeCartById = async (
 ) => {
   try {
     const cartId = req.params.id
-    console.log(cartId)
     await Cart.findOneAndDelete({
       _id: cartId,
     })

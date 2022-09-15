@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
-
-import itemRoutes from './routes/item.route'
+import cors from 'cors'
+import productRoutes from './routes/product.route'
 import userRoutes from './routes/user.route'
 import cartRoutes from './routes/cart.route'
 
@@ -18,6 +18,9 @@ mongoose
     app.use(express.json())
 
     /** Rules of our API */
+
+    app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+    app.options('*', cors())
     app.use((req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*')
       res.header(
@@ -37,7 +40,7 @@ mongoose
     })
 
     /** Routes */
-    app.use('/items', itemRoutes)
+    app.use('/products', productRoutes)
     app.use('/user', userRoutes)
     app.use('/cart', cartRoutes)
 
@@ -49,7 +52,6 @@ mongoose
     /** Error handling */
     app.use((req, res, next) => {
       const error = new Error('Not found')
-      console.log(req)
       res.status(404).json({
         message: error.message,
       })

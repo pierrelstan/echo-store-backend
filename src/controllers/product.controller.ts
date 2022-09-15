@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from 'express'
-import Item from '../models/item.model'
+import Product from '../models/product.model'
 
 const getItems = (req: Request, res: Response, next: NextFunction) => {
-  return Item.find()
-    .then((items) => res.status(200).json({ items }))
+  return Product.find()
+    .then((products) => res.status(200).json({ products }))
     .catch((error) => res.status(500).json({ error }))
 }
 const getOneItem = (req: Request, res: Response, next: NextFunction) => {
   const itemId = req.params.id
 
-  return Item.findById(itemId)
-    .then((item) =>
-      item
-        ? res.status(200).json({ item })
+  return Product.findById(itemId)
+    .then((product) =>
+      product
+        ? res.status(200).json({ product })
         : res.status(404).json({ message: 'not found' })
     )
     .catch((error) => res.status(500).json({ error }))
