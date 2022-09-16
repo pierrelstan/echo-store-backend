@@ -5,7 +5,7 @@ interface IUser {
   hash: string
   validPassword: any
 }
-interface IItem {
+interface IProduct {
   title: string
   description: string
   image?: string
@@ -22,4 +22,4 @@ interface ICart {
   isAddedToCart: Boolean
 }
 
-export { IItem, IUser, ICart }
+export { IProduct, IUser, ICart }

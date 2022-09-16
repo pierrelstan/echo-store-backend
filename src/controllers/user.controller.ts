@@ -58,11 +58,9 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
 const login = (req: Request, res: Response, next: NextFunction) => {
   let { email, password } = req.body
-  console.log(req)
   User.find({ email })
     .exec()
     .then((users) => {
-      console.log(users)
       if (users.length !== 1) {
         return res.status(401).json({
           message: 'Unauthorized',
@@ -93,7 +91,6 @@ const login = (req: Request, res: Response, next: NextFunction) => {
       })
     })
     .catch((err) => {
-      console.log(err)
       res.status(500).json({
         error: err,
       })
