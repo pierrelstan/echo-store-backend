@@ -26,7 +26,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     })
   }
 
-  bcryptjs.hash(password, 10, (hashError, hash) => {
+  bcryptjs.hash(password, 10, (hashError: { message: any }, hash: any) => {
     if (hashError) {
       return res.status(401).json({
         message: hashError.message,
@@ -57,7 +57,10 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 const login = (req: Request, res: Response, next: NextFunction) => {
-  let { email, password } = req.body
+  const {
+    values: { email, password },
+  } = req.body
+  console.log(req.body)
   User.find({ email })
     .exec()
     .then((users) => {
@@ -67,28 +70,32 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         })
       }
 
-      bcryptjs.compare(password, users[0].password, (error, result) => {
-        if (error) {
-          return res.status(401).json({
-            message: 'Password Mismatch',
-          })
-        } else if (result) {
-          signJWT(users[0], (_error, token) => {
-            if (_error) {
-              return res.status(500).json({
-                message: _error.message,
-                error: _error,
-              })
-            } else if (token) {
-              return res.status(200).json({
-                message: 'Auth successful',
-                token: token,
-                user: users[0],
-              })
-            }
-          })
+      bcryptjs.compare(
+        password,
+        users[0].password,
+        (error: any, result: any) => {
+          if (error) {
+            return res.status(401).json({
+              message: 'Password Mismatch',
+            })
+          } else if (result) {
+            signJWT(users[0], (_error, token) => {
+              if (_error) {
+                return res.status(500).json({
+                  message: _error.message,
+                  error: _error,
+                })
+              } else if (token) {
+                return res.status(200).json({
+                  message: 'Auth successful',
+                  token: token,
+                  user: users[0],
+                })
+              }
+            })
+          }
         }
-      })
+      )
     })
     .catch((err) => {
       res.status(500).json({

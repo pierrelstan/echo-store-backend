@@ -10,11 +10,13 @@ const getOneItem = (req: Request, res: Response, next: NextFunction) => {
   const itemId = req.params.id
 
   return Product.findById(itemId)
-    .then((product) =>
+    .then((product) => {
+      console.log(product)
       product
         ? res.status(200).json({ product })
         : res.status(404).json({ message: 'not found' })
-    )
+    })
+
     .catch((error) => res.status(500).json({ error }))
 }
 
