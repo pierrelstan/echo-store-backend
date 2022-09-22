@@ -17,6 +17,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
   let { email, password } = req.body // see if user exists
+  console.log(req.body)
   let user = await User.findOne({
     email,
   })
@@ -57,10 +58,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 const login = (req: Request, res: Response, next: NextFunction) => {
-  const {
-    values: { email, password },
-  } = req.body
-  console.log(req.body)
+  const { email, password } = req.body
   User.find({ email })
     .exec()
     .then((users) => {
