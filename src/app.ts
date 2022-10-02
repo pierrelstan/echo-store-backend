@@ -49,6 +49,11 @@ mongoose
       res.status(200).json({ hello: 'world' })
     )
 
+    /** Welcome to echo store */
+    app.get('/', (req, res, next) =>
+      res.status(200).json({ message: 'Welcome to echo store' })
+    )
+
     /** Error handling */
     app.use((req, res, next) => {
       const error = new Error('Not found')
