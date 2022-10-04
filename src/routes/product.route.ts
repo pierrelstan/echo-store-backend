@@ -1,9 +1,10 @@
-import express from 'express'
-import controller from '../controllers/product.controller'
+import express from "express";
+import controller from "../controllers/product.controller";
 
-const app = express.Router()
+const app = express.Router();
 
-app.get('/', controller.getItems)
-app.get('/:id', controller.getOneItem)
+app.get("/", controller.getItems);
+app.get("/:id", controller.getOneItem);
+app.get("/category/:query", controller.getItemsByCategory);
 
-export = app
+export = app;
