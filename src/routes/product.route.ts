@@ -5,6 +5,6 @@ const app = express.Router();
 
 app.get("/", controller.getItems);
 app.get("/:id", controller.getOneItem);
-app.get("/:query", controller.getItemsCategory);
+app.get("/category/:query", controller.getItemsCategory);
 
 export = app;
