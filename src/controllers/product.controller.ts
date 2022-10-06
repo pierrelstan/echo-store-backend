@@ -7,10 +7,10 @@ const getItems = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 const getItemsCategory = (req: Request, res: Response, next: NextFunction) => {
-  return Product.find({
-    category: req.params.query,
-  })
-    .then((products) => res.status(200).json({ products }))
+  return Product.aggregate([{ $match: { category: req.params.query } }])
+    .then((products) => {
+      res.status(200).json({ products });
+    })
     .catch((error) => res.status(500).json({ error }));
 };
 const getOneItem = (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +18,6 @@ const getOneItem = (req: Request, res: Response, next: NextFunction) => {
 
   return Product.findById(itemId)
     .then((product) => {
-      console.log(product);
       product
         ? res.status(200).json({ product })
         : res.status(404).json({ message: "not found" });
