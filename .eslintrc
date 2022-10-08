@@ -1,13 +1,20 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest/globals": true
+  },
   "rules": {
-    "no-console": 1 // Remember, this means error!
+    "no-console": 1, // Remember, this means error!
+    "prettier/prettier": 2
   }
 }
