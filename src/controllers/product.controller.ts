@@ -1,29 +1,29 @@
-import { NextFunction, Request, Response } from "express";
-import Product from "../models/product.model";
+import { NextFunction, Request, Response } from 'express';
+import Product from '../models/product.model';
 
 const getItems = (req: Request, res: Response, next: NextFunction) => {
-  return Product.find()
-    .then((products) => res.status(200).json({ products }))
-    .catch((error) => res.status(500).json({ error }));
+    return Product.find()
+        .then((products) => res.status(200).json({ products }))
+        .catch((error) => res.status(500).json({ error }));
 };
 const getItemsCategory = (req: Request, res: Response, next: NextFunction) => {
-  return Product.aggregate([{ $match: { category: req.params.query } }])
-    .then((products) => {
-      res.status(200).json({ products });
-    })
-    .catch((error) => res.status(500).json({ error }));
+    return Product.aggregate([{ $match: { category: req.params.query } }])
+        .then((products) => {
+            res.status(200).json({ products });
+        })
+        .catch((error) => res.status(500).json({ error }));
 };
 const getOneItem = (req: Request, res: Response, next: NextFunction) => {
-  const itemId = req.params.id;
+    const itemId = req.params.id;
 
-  return Product.findById(itemId)
-    .then((product) => {
-      product
-        ? res.status(200).json({ product })
-        : res.status(404).json({ message: "not found" });
-    })
+    return Product.findById(itemId)
+        .then((product) => {
+            product
+                ? res.status(200).json({ product })
+                : res.status(404).json({ message: 'not found' });
+        })
 
-    .catch((error) => res.status(500).json({ error }));
+        .catch((error) => res.status(500).json({ error }));
 };
 
 export default { getItems, getOneItem, getItemsCategory };
