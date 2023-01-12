@@ -16,9 +16,9 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
-    let { email, password } = req.body; // see if user exists
+    const { email, password } = req.body; // see if user exists
     console.log(req.body);
-    let user = await User.findOne({
+    const user = await User.findOne({
         email,
     });
     if (user) {
