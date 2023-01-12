@@ -42,7 +42,7 @@ To run this server locally you need to have these requirements:
 - [Node.js](https://nodejs.org)
 - [MongoDB](https://www.mongodb.com/download-center#community)
 
-###Installations
+### Installations
 
 Use following commands to run this API-server locally:
 
