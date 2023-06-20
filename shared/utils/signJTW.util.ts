@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import logging from './logging.util';
-import { IUser } from '../types/types';
+import { IUser } from '../../shared/types/types';
 
 import dotenv from 'dotenv';
 dotenv.config();

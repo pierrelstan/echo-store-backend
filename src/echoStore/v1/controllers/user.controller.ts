@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
-import logging from '../utils/logging.util';
+import logging from '../../../../shared/utils/logging.util';
 import User from '../models/user.model';
-import signJWT from '../utils/signJTW.util';
+import signJWT from '../../../../shared/utils/signJTW.util';
 
 const NAMESPACE = 'User';
 

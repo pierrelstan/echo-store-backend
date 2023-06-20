@@ -1,5 +1,5 @@
 {
-    "name": "echo-store-server",
+    "name": "monorepo",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
