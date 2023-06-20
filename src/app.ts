@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import productRoutes from './routes/product.route';
-import userRoutes from './routes/user.route';
-import cartRoutes from './routes/cart.route';
+import productRoutes from './echoStore/v1/routes/product.route';
+import userRoutes from './echoStore/v1/routes/user.route';
+import cartRoutes from './echoStore/v1/routes/cart.route';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 mongoose
-    .connect(process.env.MONGODB_API_KEY, { retryWrites: true, w: 'majority' })
+    .connect(process.env.MONGODB_API, { retryWrites: true, w: 'majority' })
     .then(() => {
         console.log('Successfully connected to MONGODB ATLAS!');
         app.use(express.urlencoded({ extended: true }));
@@ -38,7 +38,7 @@ mongoose
             next();
         });
 
-        /** Routes */
+        /** Routes  Echo Store*/
         app.use('/products', productRoutes);
         app.use('/user', userRoutes);
         app.use('/cart', cartRoutes);
@@ -50,7 +50,7 @@ mongoose
 
         /** Welcome to echo store */
         app.get('/', (req, res, next) =>
-            res.status(200).json({ message: 'Welcome to echo store' })
+            res.status(200).json({ message: 'Welcome to monorepo ' })
         );
 
         /** Error handling */

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
-import logging from '../utils/logging.util';
+import logging from '../../../../shared/utils/logging.util';
 const NAMESPACE = 'Auth';
 
 env.config();

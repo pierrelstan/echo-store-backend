@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IProduct } from '../types/types';
+import { IProduct } from '../../../../shared/types/types';
 
 const ProductSchema = new Schema<IProduct>({
     title: { type: String, required: true },
